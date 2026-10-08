@@ -15,14 +15,15 @@ def echo_server():
 
     while True:
         conn, address = server_socket.accept()
+        # receive bytes and decode to string
         data = conn.recv(1024).decode('utf-8')
 
         if data:
             print(f"Received from client {address}: {data}")
+            # encode string back to bytes
             conn.sendall(data.encode('utf-8'))
 
         conn.close()
-        server_socket.close()
 
 def echo_client():
     message = "Test message"
@@ -30,12 +31,15 @@ def echo_client():
 
     try:
         client_socket.connect((host, port))
+        # encode string to bytes
         client_socket.sendall(message.encode('utf-8'))
+        # receive bytes and decode to string
         received_data = client_socket.recv(1024).decode('utf-8')
 
-        print(f"Sent message: {message}")
-        print(f"Received message: {received_data}")
+        print(f"Sent: {message}")
+        print(f"Received: {received_data}")
 
+        # compare sent and received data
         if message == received_data:
             print("Connection successful, data matches")
         else:

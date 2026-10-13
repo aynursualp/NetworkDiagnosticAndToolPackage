@@ -5,3 +5,6 @@ Client: hi
 Client: hi
 Server: hello
 Server: hello
+[Tue Oct 13 20:42:33 2026]Client: hello server
+[Tue Oct 13 20:42:40 2026]Server: hello client
+[Tue Oct 13 20:42:40 2026]Server: hello client

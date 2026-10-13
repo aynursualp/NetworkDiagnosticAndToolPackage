@@ -1,16 +1,17 @@
 import ntplib
 import time
 
-def sntp_client():
+def get_time_string():
     try:
         client = ntplib.NTPClient()
         response = client.request('pool.ntp.org')
+        return time.ctime(response.tx_time)
+    except Exception:
+        return time.ctime()
 
-        # convert incoming timestamp into readable date and time
-        print(f"Time received from server: {time.ctime(response.tx_time)}")
-    
-    except Exception as e:
-        print(f"Time information can not be received. Details: {e}")
+def sntp_client():
+    print("SNTP Time Synchronization")
+    print(f"Time received from server: {get_time_string()}")
 
 if __name__ == '__main__':
     sntp_client()

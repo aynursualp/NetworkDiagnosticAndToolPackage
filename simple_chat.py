@@ -1,11 +1,13 @@
 import socket
+from time_synchronization import get_time_string
 
 host = 'localhost'
 port = 9901
 
 def save_to_file(sender, message):
+    timestamp = get_time_string()
     with open("chat_file.txt", "a", encoding="utf-8") as file:
-        file.write(f"{sender}: {message}\n")
+        file.write(f"[{timestamp}]{sender}: {message}\n")
 
 def chat_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

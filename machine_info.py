@@ -2,13 +2,12 @@ import socket
 import netifaces
 
 def get_machine_info():
-    host_name = socket.gethostname()
-    ip_address = socket.gethostbyname(host_name)
+    host_name = socket.gethostname() # retrieve host name 
+    ip_address = socket.gethostbyname(host_name) # obtain ip address
 
     print("Host name: ", host_name)
     print("IP address: ", ip_address)
 
-    netifaces.gateways() # show gateway list
     interfaces = netifaces.interfaces() # get interfaces
 
     print("Network Interfaces: ")

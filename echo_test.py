@@ -5,7 +5,7 @@ port = 9900
 
 def echo_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # enable address/port reuse
+    # enable port reuse
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     server_socket.bind((host, port))

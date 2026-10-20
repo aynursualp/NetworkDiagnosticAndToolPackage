@@ -52,7 +52,7 @@ HTML_TEMPLATE = """
         fetch('/api/system')
             .then(response => response.json())
             .then(data => {
-                document.getElementById('hostname').innerTwxt = `Host: ${data.hostname} | IP: ${data.ip}`;
+                document.getElementById('hostname').innerText = `Host: ${data.hostname} | IP: ${data.ip}`;
                 document.getElementById('sntp-time').innerText = `SNTP Time: ${data.time}`;
             });
         }
@@ -65,7 +65,7 @@ HTML_TEMPLATE = """
             });
         }
         // retrieve data when the page loads
-        window.onload = () => { fetchSystemInfo; fetchLogs(); };
+        window.onload = () => { fetchSystemInfo(); fetchLogs(); };
     </script>
 </body>
 </html>
@@ -73,10 +73,12 @@ HTML_TEMPLATE = """
 
 @app.route('/')
 def dashboard():
+    # render the main dahsboard interface
     return render_template_string(HTML_TEMPLATE)
 
 @app.route('/api/system')
 def api_system():
+    # api endpoint to provide machine and time data
     hostname = socket.gethostname()
     ip_address = socket.gethostbyname(hostname)
     return jsonify({
@@ -87,6 +89,7 @@ def api_system():
 
 @app.route('/api/logs')
 def api_logs():
+    # api endpoint to read and provide chat logs from text file
     try:
         with open("chat_file.txt", "r", encoding="utf-8") as f:
             content = f.read()
